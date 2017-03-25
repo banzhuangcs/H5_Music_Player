@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!--
+      webpack主要性能提升在于分割代码，然后异步按需加载
+      1、样式表通过link标签引入，而不是打包在文件中
+      2、第三方库或者不常变动的业务代码，异步按需加载
+
+      require.ensure(dependencies, callback)
+
+      webpack工作流：静态分析得到模块的类型和依赖
+      根据模快的类型调用loader进行编译
+      然后进行打包
+      最后插件处理：比如提取公共模块，css以link标签引用，生成对输出目录的文件的引用
+
+      webpack将代码打包后的文件称为chunk，根据配置文件的不同，chunk分为Entry chunk(入口引用的公共文件，一般是先于Normal chunk加载，包含webpack运行时的代码)和Normal chunk(业务模块)
+
+      每次通过webpack的打包机制会生成具有不同hash的chunk，那么浏览器缓存就会失效
+      每次对业务代码进行修改，则打包后的Entry chunk的webpack 运行代码也会改变，导致entry chunk的hash也会改变，所以需要将entry chunk的webpack运行时代码提取出来
+
+      require.ensure，就是通过静态分析，把依赖项和回调函数引用的模块打包成一个文件，在需要的时候webpack会创建script dom，开启异步加载
+
+      // webpack打包后如果没有提取出公共代码，那么每个Normal Chunk都会出现webpack 运行时代码
+
+      // webpack对每个模块构造完成好的代码上面都会增加类似CommonJS的匿名函数包起来
+      /*
+        webpack如果对export default 会最终编译成Object.defineProperty(exports, '__esModule', { value: true });
+        exports.default = xx
+
+        import xx from './xx';
+        xx();会被编译成var xx = __webpack_require__(number)
+        xx.default();
+
+        webpackJsonp([当前模块id], [依赖的模块，自声的模块], [标识自身模块的索引]);
+        把依赖模块和自身模块用modules存储起来
+        开始执行自身的模块 __webpack_require__(1);
+
+        webpack的工作流程：
+          指定入口文件，对应用模块进行静态分析，确定模块的类型和依赖，在使用loader对各种类型的模块进行编译，编译完成后进行打包，打包好在调用插件比如进行提取出公共的模块，运用浏览器缓存机制，单独将第三方，样式和不常改变的业务代码打包，或者利用代码分割，对特殊的代码进行异步加载
+
+          如果将所有模块打包成一个文件，那么webpack的运行时文件就在该文件中，运行时文件包括webpackJsonp、__webpack_require__、__wepack_require__.e()，运行时文件优先加载
+
+          webpackJsonp包含三个参数，第一个参数是代表当前模块的id,第二个参数代表依赖的模块和自身的模块结构函数，第三个参数代表自身模块函数的索引
+
+          __webpack_require__：根据模块id，调用模块内部代码，传入module、module.exports等参数，返回模块的exports
+
+          __webpack_require__.e(异步加载的模块id - webpack自动生成)，得到模块的具体路径，创建script标签，异步加载，返回的是promise，等依赖模块加载完成在执行require.ensure()的回调函数的方法
+
+          在loader编译阶段，如果是使用es6语法编写的模块引用的，那么会加上Object.defineProperty(xx, '__esModule', { value: true });
+          如果是import xx; xx() 会被编译成xx.default()
+          如果是import { xx }; xx() 会被编译成xx();
+      */
+    -->
+  </body>
+</html>
