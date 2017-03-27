@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      .xx {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        clip: rect(30px, 80px, 80px, 40px);
+        background: green;
+
+        /*
+          right > left
+          bottom > top
+        */
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -36,7 +52,8 @@
         import xx from './xx';
         xx();会被编译成var xx = __webpack_require__(number)
         xx.default();
-
+        animation-timing-
+        animation-iterator
         webpackJsonp([当前模块id], [依赖的模块，自声的模块], [标识自身模块的索引]);
         把依赖模块和自身模块用modules存储起来
         开始执行自身的模块 __webpack_require__(1);
@@ -55,6 +72,21 @@
           在loader编译阶段，如果是使用es6语法编写的模块引用的，那么会加上Object.defineProperty(xx, '__esModule', { value: true });
           如果是import xx; xx() 会被编译成xx.default()
           如果是import { xx }; xx() 会被编译成xx();
+          webpackJsonp
+          git rm 文件 从本地仓库删除该文件
+          git rm --cache 从缓冲区删除该文件
+          回退
+          git reset --mixed // 回退缓冲区和本地仓库到指定版本，本地代码不回退
+          git reset --soft  // 只回退本地仓库到指定版本，缓冲区和本地代码不回退
+          git reset --hard ^ // 缓冲区、本地仓库、本地代码都回退到指定版本
+
+          webpack publicPath: 资源文件的引用目录，相对于网站根目录的
+          file-loader: 首先会将css中引用的图片或字体打包到设置的name路径下
+          然后把其中的路径换成publicPath + name参数路径,如果图片不是和css在一目录需要
+          需要在ExtractTextWebpackPlugin的extract方法提供的对象的publicPath中改变
+          
+
+
       */
     -->
   </body>

@@ -1,0 +1,29 @@
+H5音乐播放器需求
+1、歌曲播放、暂停
+2、切换上一首和下一首
+3、展示歌曲播放进度、总共多少分钟和还剩多少分钟
+4、调节音量
+5、切换随机播放、单曲播放、顺序播放
+6、显示歌词
+
+组件划分
+  公共组件：应用中常用的，只是控制ui自身状态的组件，对业务状态只读。
+    比如button、input、checkbox、radio
+
+    input：包括的状态分为type placeholder value，绑定input的onChange，修改value，
+    checkbox: 组件状态分为disable checked label，对checkbox绑定onChange，修改其checked状态
+    radio和checkbox差不多
+    select: 组件状态分为value和options，对select绑定onChange
+  业务组件
+    容器组件：获取数据，控制展示组件状态
+    展示组件：定义组件结构和样式
+
+h5音乐播放器组件划分
+  因为项目不复杂、功能不算多、开发人数少，此项目的组件全都划分为业务组件
+  业务组件：
+    PlayerProgress
+    Sound
+    PlayerType
+    WordControl
+    PlayerControl
+    Word

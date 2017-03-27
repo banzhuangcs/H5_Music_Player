@@ -5,13 +5,11 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
 
 export default (env) => ({
-  context: __dirname,
-
   entry: {
-    app: './src/app.js'
+    app: path.join(__dirname, 'src', 'app.js'),
+    vender: ['react', 'react-dom', 'redux', 'react-redux', 'react-router']
   },
 
   output: {
@@ -25,10 +23,11 @@ export default (env) => ({
       use: 'babel-loader',
       exclude: /node_modules/
     }, {
-      test: /\.css/,
-      use: ExtractTextWebpackPlugin.extract({
-        use: 'css-loader?modules&localIdentName=[name]__[local]--[hash:base64:5]'
-      })
+      test: /\.(ttf|woff)/,
+      use: 'file-loader?name=assets/fonts/[hash].[ext]'
+    }, {
+      test: /\.jpg/,
+      use: 'url-loader?limit=8192&name=assets/images/[hash].[ext]'
     }]
   },
 
@@ -42,8 +41,6 @@ export default (env) => ({
     new HtmlWebpackPlugin({
       template: 'index.html',
       title: 'HTML5简单音乐播放器'
-    }),
-
-    new ExtractTextWebpackPlugin('style.css')
+    })
   ]
 });
