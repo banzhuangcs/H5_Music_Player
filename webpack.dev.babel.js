@@ -17,8 +17,7 @@ export default (env) =>
     devtool: 'eval-source-map',
 
     devServer: {
-      inline: true,
-      hot: true
+      inline: true
     },
 
     module: {

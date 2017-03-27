@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './statics/styles/xx.css';
+import PlayerProgress from './components/content/PlayerProgress/PlayerProgress';
+import './statics/styles/reset.css';
+import './statics/styles/appearance.css';
+import './statics/styles/attr.css';
+import './statics/styles/global.css';
 
-class Image extends Component {
+class App extends Component {
   render() {
-    return <div className={ styles.xx }></div>
+    return (
+      <div>
+        <PlayerProgress />
+      </div>
+    );
   }
 }
 
 ReactDOM.render(
-  <Image />,
-  document.getElementById('app')
+  <App />,
+  document.querySelector('#app')
 );
