@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PlayerProgress from './components/content/PlayerProgress/PlayerProgress';
+import PlayerProgress from './components/content/PlayerProgress';
 import './statics/styles/reset.css';
 import './statics/styles/appearance.css';
 import './statics/styles/attr.css';
