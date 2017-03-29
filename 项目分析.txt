@@ -27,3 +27,6 @@ h5音乐播放器组件划分
     WordControl
     PlayerControl
     Word
+
+React开发问题
+ 1、React的Event不是DOM Event而是自己封装的，如果将这个对象在当前上下文传入给其他函数，那么会失效，解决办法就是e.persist();

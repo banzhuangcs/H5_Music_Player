@@ -46,9 +46,9 @@ export default class PlayerProgress extends Component {
         <Progress
           width={ 400 }
           height={ 5 }
-          circleWidth={ 18 }
-          circleHeight={ 18 }
-          onProgress={ () => {} } />
+          circleWidth={ 16 }
+          circleHeight={ 16 }
+          onProgress={ (percent) => { console.log(percent)  } } />
 
         <div style={ this.style.time }>
           <label>{ this.state.remainTime }</label>/
@@ -56,17 +56,5 @@ export default class PlayerProgress extends Component {
         </div>
       </div>
     );
-  }
-
-  handleMouseOver() {
-
-  }
-
-  handleMouseMove() {
-
-  }
-
-  handleMouseOut() {
-
   }
 }
