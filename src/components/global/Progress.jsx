@@ -3,7 +3,6 @@
 */
 
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 
 const addEvent = (el, type, handle) =>
   el.addEventListener(type, handle, false)
