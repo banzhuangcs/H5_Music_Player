@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.player-control {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  height: 36px;
+  font-family: H5Music;
+}
+
+.player-control-prev, .player-control-next {
+  flex-basis: 20px;
+  height: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.player-control-visible {
+  flex-basis: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.player-control-visible-play, .player-control-visible-pause {
+  composes: player-control-visible;
+}
+
+.player-control-prev:after {
+  content: "\f4ab";
+}
+
+.player-control-next:after {
+  content: "\f4ad";
+}
+
+.player-control-visible-play:after {
+  content: "\f215";
+}
+
+.player-control-visible-pause:after {
+  content: "\f210";
+}

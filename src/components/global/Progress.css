@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.progress {
+  position: relative;
+  background: #777;
+}
+
+.consumption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: '#e03a3a';
+  z-index: 1;
+}
+
+.regulator {
+  position: absolute;
+  border-radius: 100%;
+  background: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+  z-index: 2;
+}

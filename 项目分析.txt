@@ -30,3 +30,34 @@ h5音乐播放器组件划分
 
 React开发问题
  1、React的Event不是DOM Event而是自己封装的，如果将这个对象在当前上下文传入给其他函数，那么会失效，解决办法就是e.persist();
+歌词同步
+ 2、异步加载lrc文件
+
+Redux异步action
+  applyMiddleware
+    定义为一个高阶函数，接收类似redux-thunk这种中间件，返回一个接收redux createStore方法的新方法，新方法里在返回一个方法
+    在最后返回的方法中，首先创建store，创建中间件对象，包括getState和dispatch，传入给react-thunk这个中间件
+
+  当createStore第二个参数是调用applyMiddleware创建的高阶函数的话，那么就会直接的传入createStore和当前reducer创建store
+  在高阶返回的新函数中，创建store,middlewareAPI
+  middlewareAPI里包括getState: store.getState, dispatch: (action) => dispatch(action)
+  调用middleware，并且传入middlewareAPI给react-trunk返回(next) => (action) => {
+
+  },在传入store.dispatch就返回(action) => {
+    f
+  }
+
+  返回的{
+    getState,
+    subscribe,
+    dispatch: function (action) {
+      if (action === 'function') {
+        return dispatch(action(dispatch, getState))
+      }
+    }
+  }
+
+  dispatch(actionCreator(sj))
+
+  dispatch()
+  dispatch(actionCreator(dispatch))

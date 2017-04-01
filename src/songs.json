@@ -1,0 +1,16 @@
+[
+  {
+    "title": "成都",
+    "author": "赵雷",
+    "audio": "http://m2.music.126.net/4gwWNLUdEZuPCKGUWWu_rw==/18720284975304502.mp3",
+    "thumbnail": "http://p1.music.126.net/34YW1QtKxJ_3YnX9ZzKhzw==/2946691234868155.jpg",
+    "songlrc": "https://s-mohan.github.io/demo/smusic/data/chengdu.lrc"
+  },
+  {
+    "title": "Diamonds",
+    "author": "Rihanna",
+    "audio": "http://m2.music.126.net/vmNy7zVcQuBIPzZh4zf4Bg==/1890060488175269.mp3",
+    "thumbnail": "http://p1.music.126.net/vrJzlA1RIiwaPHlXzZy90g==/3263350514797284.jpg",
+    "songlrc": "https://s-mohan.github.io/demo/smusic/data/diamonds.lrc"
+  }
+]

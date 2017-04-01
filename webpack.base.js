@@ -22,11 +22,15 @@ export default (env) => ({
       use: 'babel-loader',
       exclude: /node_modules/
     }, {
-      test: /\.(ttf|woff)/,
+      test: /\.(ttf|woff|eot|svg)/,
       use: 'file-loader?name=assets/fonts/[hash].[ext]'
     }, {
       test: /\.jpg/,
       use: 'url-loader?limit=8192&name=assets/images/[hash].[ext]'
+    }, {
+      test: /\.json/,
+      use: 'json-loader',
+      exclude: /node_modules/
     }]
   },
 
