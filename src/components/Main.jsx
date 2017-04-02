@@ -3,39 +3,40 @@
 */
 
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSongs } from '../actions/songActionCreators';
+import { connect } from 'react-redux';
+import { getSongs } from '../actionCreators/song';
 import SongDetail from './mainContent/SongDetail/SongDetail';
 import SoundControl from './mainContent/SoundControl/SoundControl';
 import PlayProgress from './mainContent/PlayProgress/PlayProgress';
 import PlayModel from './content/PlayModel/PlayModel';
 import LyricControl from './content/LyricControl/LyricControl';
+import Play from './content/Play/Play';
 import style from '../statics/styles/global.css';
-import songs from '../songs.json';
+import data from '../songs.json';
 
 class Main extends Component {
   componentWillMount() {
     const { getSongs } = this.props;
 
     if (process.env.NODE_ENV === 'dev') {
-      getSongs(songs);
+      getSongs(data);
     }
   }
 
   render() {
     const {
-      list = [],
+      songs,
       playIndex,
       playModel,
       playSound,
-      playProgress } = this.props.song;
+      playProgress } = this.props;
 
     return (
       <div className={ style['wrapper'] }>
         <div className={ style['wrapper-inner'] }>
           <div className={ style['sound-detail'] }>
-            <SongDetail { ...list[ playIndex ] } />
+            <SongDetail { ...songs[ playIndex ] } />
           </div>
           <div className={ style['sound-progress'] }>
             <div className={ style['sound-control-panel'] }>
@@ -46,7 +47,8 @@ class Main extends Component {
             <div className={ style['play-model-panel'] }>
               <PlayModel
                 width={ 20 }
-                height={ 20 } />
+                height={ 20 }
+                playModel={ playModel } />
             </div>
             <div className={ style['play-progress-panel'] }>
               <PlayProgress
@@ -66,6 +68,21 @@ class Main extends Component {
 }
 
 export default connect(
-  ({ song }) => ({ song }),
+  ({
+    song: { songs = [] },
+    play: {
+      playIndex = 0,
+      playCondition = 'play',
+      playVolume = 0,
+      playModel = 'order',
+      playProgress = 0
+    }
+  }) => ({
+    songs,
+    playIndex,
+    playCondition,
+    playVolume,
+    playModel,
+    playProgress }),
   (dispatch) => ({ getSongs: bindActionCreators(getSongs, dispatch) })
 )(Main);

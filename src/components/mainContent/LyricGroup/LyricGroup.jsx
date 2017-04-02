@@ -5,8 +5,8 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getLyricInfo, modifyLaricUseTime } from '../../../actionCreators/lyric';
 import Lyric from '../../content/Lyric/Lyric';
-import { getLyricInfo, modifyLaricUseTime } from '../../../actions/lyricActionCreators';
 import style from './lyric_group.css';
 
 class LyricGroup extends Component {
@@ -45,14 +45,14 @@ class LyricGroup extends Component {
   }
 
   render() {
-    const { isVisible, list } = this.props;
+    const { isVisible, lyrics } = this.props;
 
     if (isVisible) {
       return (
         <div className={ style['lyric-group'] }>
           <div className={ style['lyric-group-inner'] }>
             <div className={ style['lyric-group-panel'] }>
-              { list.map((lyric, index) =>
+              { lyrics.map((lyric, index) =>
                 <Lyric key={ index } text={ lyric.part } />
               ) }
             </div>
@@ -66,6 +66,9 @@ class LyricGroup extends Component {
 }
 
 export default connect(
-  ({ lyric: { list = [], isVisible } }) => ({ list, isVisible }),
+  ({
+    lyric: {
+      lyrics = [],
+      isVisible = true } }) => ({ lyrics, isVisible }),
   (dispatch) => bindActionCreators({ getLyricInfo, modifyLaricUseTime }, dispatch)
 )(LyricGroup);

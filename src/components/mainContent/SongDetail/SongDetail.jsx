@@ -3,17 +3,18 @@
 */
 
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import LyricGroup from '../LyricGroup/LyricGroup';
 import PlayControl from '../../content/PlayControl/PlayControl';
 import style from './song_detail.css';
 
-class SongDetail extends Component {
+export default class SongDetail extends Component {
   static propTypes = {
     author: PropTypes.string,
     title: PropTypes.string,
-    thumbnail: PropTypes.string
+    thumbnail: PropTypes.string,
+    songlrc: PropTypes.string
   };
 
   render() {
@@ -42,5 +43,3 @@ class SongDetail extends Component {
     );
   }
 }
-
-export default SongDetail;

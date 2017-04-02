@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { toggleLyric } from '../../../actions/lyricActionCreators';
+import { toggleLyric } from '../../../actionCreators/lyric';
 import style from './lyric_control.css';
 
 class LyricControl extends Component {
@@ -34,6 +34,10 @@ class LyricControl extends Component {
 }
 
 export default connect(
-  ({ lyric: { isVisible } }) => ({ isVisible }),
+  ({
+    lyric: {
+      isVisible = true
+    }
+  }) => ({ isVisible }),
   (dispatch) => ({ toggleLyric: bindActionCreators(toggleLyric, dispatch) })
 )(LyricControl);

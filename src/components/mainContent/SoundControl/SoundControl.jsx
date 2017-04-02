@@ -8,7 +8,8 @@ import style from './sound_control.css';
 
 export default class SoundControl extends Component {
   static propTypes = {
-    width: PropTypes.number.isRequired
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired
   };
 
   constructor(props) {

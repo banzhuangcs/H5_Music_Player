@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import song from './song';
 import lyric from './lyric';
+import play from './play';
 
 const reducers = {
   song,
-  lyric
+  lyric,
+  play
 };
 
 export default combineReducers(reducers);

@@ -5,19 +5,19 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { modifySongPlayCondition, modifySongPlayIndex } from '../../../actions/songActionCreators';
+import { modifyPlayCondition, modifyPlayIndex } from '../../../actionCreators/play';
 import style from './play_control.css';
 
-class PlayerControl extends Component {
+class PlayControl extends Component {
   constructor(props) {
     super(props);
 
     this.handlePlayPrev = () =>
-      this.props.modifySongPlayIndex(this.props.playIndex - 1)
+      this.props.modifyPlayIndex(this.props.playIndex - 1)
     this.handlePlayCondition= () =>
-      this.props.modifySongPlayCondition(!this.props.playCondition)
+      this.props.modifyPlayCondition(!this.props.playCondition)
     this.handlePlayNext = () =>
-      this.props.modifySongPlayIndex(this.props.playIndex + 1)
+      this.props.modifyPlayIndex(this.props.playIndex + 1)
   }
 
   render() {
@@ -35,6 +35,11 @@ class PlayerControl extends Component {
 }
 
 export default connect(
-  ({ song }) => ({ playIndex: song.playIndex, playCondition: song.playCondition }),
-  (dispatch) => bindActionCreators({ modifySongPlayIndex, modifySongPlayCondition }, dispatch)
-)(PlayerControl);
+  ({
+    play: {
+      playIndex = 0,
+      playCondition = 'play'
+    }
+  }) => ({ playIndex, playCondition }),
+  (dispatch) => bindActionCreators({ modifyPlayIndex, modifyPlayCondition }, dispatch)
+)(PlayControl);

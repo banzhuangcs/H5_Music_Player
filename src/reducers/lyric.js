@@ -6,7 +6,7 @@ export default function lyric (state = {}, action) {
   switch (action.type) {
     case 'GET_LYRIC_INFO':
       return Object.assign({}, state, {
-        list: action.list,
+        lyrics: action.lyrics,
         totalTime: action.totalTime,
         isVisible: action.isVisible
       });

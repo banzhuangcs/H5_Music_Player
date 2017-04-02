@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-.play-model-loop:after {
+.play-model-order:after {
   content: "\f459";
 }
 
-.play-model-shuffle:after {
-  content: "\f4a8";  
+.play-model-loop:after {
+  content: "\f4a8";
 }

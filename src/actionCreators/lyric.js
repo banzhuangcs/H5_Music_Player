@@ -9,13 +9,12 @@ export const getLyricInfo = (url, getLyricList, getLyricTotalTime) => (dispatch)
     .then(res => res.text())
     .catch(error => error.message)
     .then(lyric => {
-      const list = getLyricList(lyric);
+      const lyrics = getLyricList(lyric);
       const totalTime = getLyricTotalTime(lyric);
       dispatch({
         type: 'GET_LYRIC_INFO',
         totalTime,
-        list,
-        isVisible: true
+        lyrics
       })
     })
 };
