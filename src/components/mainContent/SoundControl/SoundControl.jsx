@@ -3,7 +3,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import Progress from '../../global/Progress';
+import Progress from '../../global/Progress/Progress';
 import style from './sound_control.css';
 
 export default class SoundControl extends Component {

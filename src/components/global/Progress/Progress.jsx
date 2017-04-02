@@ -104,7 +104,11 @@ export default class Progress extends Component {
         className={ style['progress'] }
         style={{ width, height }}
         onMouseDown={ this.handleSpeed }>
-          <span className={ style['consumption'] } style={{ width: isHorizontal ? regulatorLeft : width, height: isHorizontal ? height : regulatorTop }}></span>
+          <span
+            className={ style['consumption'] }
+            style={{
+              width: isHorizontal ? regulatorLeft : width, 
+              height: isHorizontal ? height : regulatorTop }}></span>
           <span
             className={ style['regulator'] }
             style={{ width: circleWidth, height: circleHeight, left: regulatorLeft, top: regulatorTop }}
