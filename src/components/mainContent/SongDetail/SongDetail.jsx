@@ -6,8 +6,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LyricGroup from '../LyricGroup/LyricGroup';
-import PlayControl from '../PlayControl/PlayControl';
-import style from './SongDetail.css';
+import PlayControl from '../../content/PlayControl/PlayControl';
+import style from './song_detail.css';
 
 class SongDetail extends Component {
   static propTypes = {

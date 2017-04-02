@@ -5,16 +5,13 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Lyric from '../Lyric/Lyric';
+import Lyric from '../../content/Lyric/Lyric';
 import { getLyricInfo, modifyLaricUseTime } from '../../../actions/lyricActionCreators';
-import style from './LyricGroup.css';
+import style from './lyric_group.css';
 
 class LyricGroup extends Component {
   static propTypes = {
-    songlrc: PropTypes.string,
-    list: PropTypes.array,
-    isVisible: PropTypes.bool,
-    getLyricInfo: PropTypes.func
+    songlrc: PropTypes.string
   };
 
   constructor(props) {
@@ -48,17 +45,23 @@ class LyricGroup extends Component {
   }
 
   render() {
-    return (
-      <div className={ style['lyric-group'] }>
-        <div className={ style['lyric-group-inner'] }>
-          <div className={ style['lyric-group-panel'] }>
-            { this.props.list.map((lyric, index) =>
-              <Lyric key={ index } text={ lyric.part } />
-            )}
+    const { isVisible, list } = this.props;
+
+    if (isVisible) {
+      return (
+        <div className={ style['lyric-group'] }>
+          <div className={ style['lyric-group-inner'] }>
+            <div className={ style['lyric-group-panel'] }>
+              { list.map((lyric, index) =>
+                <Lyric key={ index } text={ lyric.part } />
+              ) }
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return null;
   }
 }
 

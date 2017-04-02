@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { modifySongPlayModel } from '../../../actions/songActionCreators';
-import style from './PlayModel.css';
+import style from './play_model.css';
 
 class PlayModel extends Component {
   static propTypes = {

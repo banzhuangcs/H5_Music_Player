@@ -14,7 +14,8 @@ export const getLyricInfo = (url, getLyricList, getLyricTotalTime) => (dispatch)
       dispatch({
         type: 'GET_LYRIC_INFO',
         totalTime,
-        list
+        list,
+        isVisible: true
       })
     })
 };

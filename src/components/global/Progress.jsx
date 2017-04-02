@@ -3,7 +3,7 @@
 */
 
 import React, { Component, PropTypes } from 'react';
-import style from './Progress.css';
+import style from './progress.css';
 
 const addEvent = (el, type, handle) =>
   el.addEventListener(type, handle, false)
@@ -89,10 +89,14 @@ export default class Progress extends Component {
 
   render() {
     const {
+      direction,
       width,
       height,
       circleWidth,
       circleHeight } = this.props;
+
+    const { regulatorLeft, regulatorTop } = this.state;
+    const isHorizontal = direction === 'horizontal';
 
     return (
       <div
@@ -100,12 +104,11 @@ export default class Progress extends Component {
         className={ style['progress'] }
         style={{ width, height }}
         onMouseDown={ this.handleSpeed }>
-          <span className={ style['consumption'] }></span>
+          <span className={ style['consumption'] } style={{ width: isHorizontal ? regulatorLeft : width, height: isHorizontal ? height : regulatorTop }}></span>
           <span
             className={ style['regulator'] }
-            style={{ circleWidth, circleHeight }}
-            onMouseDown={ this.handleMouseDown }>
-          </span>
+            style={{ width: circleWidth, height: circleHeight, left: regulatorLeft, top: regulatorTop }}
+            onMouseDown={ this.handleMouseDown }></span>
       </div>
     );
   }

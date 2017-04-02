@@ -4,7 +4,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Progress from '../../global/Progress';
-import style from './SoundControl.css';
+import style from './sound_control.css';
 
 export default class SoundControl extends Component {
   static propTypes = {

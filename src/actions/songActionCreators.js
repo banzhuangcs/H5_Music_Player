@@ -6,7 +6,7 @@ export const getSongs = (songs) => ({
   type: 'GET_SONGS',
   list: songs,
   playIndex: 0,
-  playVisible: false,
+  playCondition: false,
   playSound: 35,
   playModel: 0,
   playProgress: 0
@@ -17,9 +17,9 @@ export const modifySongPlayIndex = (playIndex) => ({
   playIndex
 });
 
-export const modifySongPlayVisible = (playVisible) => ({
-  type: 'MODIFY_SONG_PLAY_VISIBLE',
-  playVisible
+export const modifySongPlayCondition = (playCondition) => ({
+  type: 'MODIFY_SONG_PLAY_Condition',
+  playCondition
 });
 
 export const modifySongPlaySound = (playSound) => ({

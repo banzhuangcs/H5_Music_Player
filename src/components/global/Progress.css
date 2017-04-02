@@ -3,13 +3,14 @@
 .progress {
   position: relative;
   background: #777;
+  cursor: pointer;
 }
 
 .consumption {
   position: absolute;
   left: 0;
   top: 0;
-  background: '#e03a3a';
+  background: #e03a3a;
   z-index: 1;
 }
 

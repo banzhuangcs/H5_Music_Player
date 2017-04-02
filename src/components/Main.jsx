@@ -6,10 +6,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getSongs } from '../actions/songActionCreators';
-import SongDetail from './content/SongDetail/SongDetail';
-import SoundControl from './content/SoundControl/SoundControl';
+import SongDetail from './mainContent/SongDetail/SongDetail';
+import SoundControl from './mainContent/SoundControl/SoundControl';
+import PlayProgress from './mainContent/PlayProgress/PlayProgress';
 import PlayModel from './content/PlayModel/PlayModel';
-import PlayProgress from './content/PlayProgress/PlayProgress';
 import LyricControl from './content/LyricControl/LyricControl';
 import style from '../statics/styles/global.css';
 import songs from '../songs.json';
@@ -27,7 +27,6 @@ class Main extends Component {
     const {
       list = [],
       playIndex,
-      playVisible,
       playModel,
       playSound,
       playProgress } = this.props.song;
@@ -57,7 +56,7 @@ class Main extends Component {
             <div className={ style['lyric-control-panel'] }>
               <LyricControl
                 width={ 20 }
-                height={ 20 } />  
+                height={ 20 } />
             </div>
           </div>
         </div>

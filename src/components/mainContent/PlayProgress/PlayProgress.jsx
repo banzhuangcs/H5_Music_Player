@@ -4,7 +4,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Progress from '../../global/Progress';
-import style from './PlayProgress.css';
+import style from './play_progress.css';
 
 export default class PlayerProgress extends Component {
   static propTypes = {

@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleLyric } from '../../../actions/lyricActionCreators';
-import style from './LyricControl.css';
+import style from './lyric_control.css';
 
 class LyricControl extends Component {
   static propTypes = {

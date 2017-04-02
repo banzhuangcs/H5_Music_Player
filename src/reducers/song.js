@@ -19,9 +19,9 @@ export default function song (state = {}, action) {
         playIndex: action.playIndex
       });
 
-    case 'MODIFY_SONG_PLAY_VISIBLE':
+    case 'MODIFY_SONG_PLAY_Condition':
       return Object.assign({}, state, {
-        playVisible: action.playVisible
+        playCondition: action.playCondition
       });
 
     case 'MODIFY_SONG_PLAY_MODEL':

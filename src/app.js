@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Main from './components/Main';
-import store from './stores/store';
+import store from './store/store';
 import './statics/styles/reset.css';
 
 ReactDOM.render(
