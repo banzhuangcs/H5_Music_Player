@@ -16,6 +16,11 @@ export default function lyric (state = {}, action) {
         isVisible: action.isVisible
       });
 
+    case 'MODIFY_LYRIC_REMAINTIME':
+      return Object.assign({}, state, {
+        remainTime: action.remainTime
+      });
+
     default:
       return state;
   }

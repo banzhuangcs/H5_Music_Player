@@ -23,14 +23,15 @@ class LyricGroup extends Component {
     this._getLyricList = (lyric) =>
       lyric.split(splitter).map(text => {
         matchTime.lastIndex = 0;
+
         return {
           useTime: matchTime.exec(text)[0].replace(/\[\]/g, ''),
           part: text.replace(/\[.*?\]/, '').trim()
         };
       })
     this._getLyricTotalTime = (lyric) => {
-      const times = lyric.match(this.matchTime);
-      const totalTime = times.pop().replace(/[\[\]]/g, '');
+      const times = lyric.match(matchTime);
+      const totalTime = times.pop().replace(/[\[\]]/g, '').replace(/\.\d+/, '');
 
       return `${ totalTime }`;
     };

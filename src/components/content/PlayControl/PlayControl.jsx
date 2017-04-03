@@ -38,7 +38,7 @@ export default connect(
   ({
     play: {
       playIndex = 0,
-      playCondition = 'pause'
+      playCondition = 'play'
     }
   }) => ({ playIndex, playCondition }),
   (dispatch) => bindActionCreators({ modifyPlayIndex, modifyPlayCondition }, dispatch)

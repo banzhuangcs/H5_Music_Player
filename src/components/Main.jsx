@@ -32,8 +32,10 @@ class Main extends Component {
       playModel,
       playVolume,
       playSound,
-      playProgress } = this.props;
-
+      playProgress,
+      totalTime,
+      remainTime } = this.props;
+    
     return (
       <div className={ style['wrapper'] }>
         <div className={ style['wrapper-inner'] }>
@@ -44,7 +46,8 @@ class Main extends Component {
             <div className={ style['sound-control-panel'] }>
               <SoundControl
                 width={ 30 }
-                height={ 30 } />
+                height={ 30 }
+                playVolume={ playVolume } />
             </div>
             <div className={ style['play-model-panel'] }>
               <PlayModel
@@ -55,7 +58,9 @@ class Main extends Component {
             <div className={ style['play-progress-panel'] }>
               <PlayProgress
                 width={ 475 }
-                height={ 30 } />
+                height={ 30 }
+                totalTime={ totalTime }
+                remainTime={ remainTime } />
             </div>
             <div className={ style['lyric-control-panel'] }>
               <LyricControl
@@ -83,9 +88,13 @@ export default connect(
     play: {
       playIndex = 0,
       playCondition = 'play',
-      playVolume = 0.3,
+      playVolume = 0.4,
       playModel = 'order',
       playProgress = 0
+    },
+    lyric: {
+      totalTime = '00:00',
+      remainTime = '00:00'
     }
   }) => ({
     songs,
@@ -93,6 +102,9 @@ export default connect(
     playCondition,
     playVolume,
     playModel,
-    playProgress }),
+    playProgress,
+    totalTime,
+    remainTime
+   }),
   (dispatch) => ({ getSongs: bindActionCreators(getSongs, dispatch) })
 )(Main);

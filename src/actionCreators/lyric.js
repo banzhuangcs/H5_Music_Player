@@ -19,28 +19,12 @@ export const getLyricInfo = (url, getLyricList, getLyricTotalTime) => (dispatch)
     })
 };
 
-export const modifyLyricUseTime = (useTime) => ({
-  type: 'MODIFY_LYRIC_USETIME',
-  useTime
+export const modifyLyricRemainTime = (remainTime) => ({
+  type: 'MODIFY_LYRIC_REMAINTIME',
+  remainTime
 });
 
 export const toggleLyric = (isVisible) => ({
   type: 'TOGGLE_LYRIC',
   isVisible
 });
-
-/* url, {
-  method: 'GET',
-  body:
-  headers: {
-
-  }
-}
-.then((res) => {
-  return res.text()
-    res.json()
-})
-res.ok
-res.status
-res.statusText
-*/

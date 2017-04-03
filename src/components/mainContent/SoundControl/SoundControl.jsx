@@ -12,7 +12,8 @@ import style from './sound_control.css';
 class SoundControl extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired
+    height: PropTypes.number.isRequired,
+    playVolume: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -27,15 +28,13 @@ class SoundControl extends Component {
     this.handleMouseOut = () =>
       this.setState({ showProgress: false })
     this.handleProgress = (percent) => {
-      console.log(percent);
-      const sound = Number(((+percent.slice(0, -1)) / 100).toFixed(1));
-      this.props.modifyPlayVolume(sound);
+      const playVolume = Number(((+percent.slice(0, -1)) / 100).toFixed(2));
+      this.props.modifyPlayVolume(playVolume);
     }
-
   }
 
   render() {
-    const { width, height } = this.props;
+    const { width, height, playVolume } = this.props;
 
     return (
       <div
@@ -54,6 +53,7 @@ class SoundControl extends Component {
               circleWidth={ 10 }
               circleHeight={ 10 }
               circlePos="bottom"
+              ratio={ playVolume }
               onProgress={ this.handleProgress } />
           </div>
         </div>

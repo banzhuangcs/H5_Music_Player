@@ -20,11 +20,13 @@ export default class Progress extends Component {
     circleWidth: PropTypes.number.isRequired,
     circleHeight: PropTypes.number.isRequired,
     circlePos: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
+    ratio: PropTypes.number.isRequired,
     onProgress: PropTypes.func.isRequired
   };
   static defaultProps = {
     direction: 'horizontal',
-    circlePos: 'left'
+    circlePos: 'left',
+    ratio: 0
   };
 
   constructor(props) {
@@ -36,14 +38,17 @@ export default class Progress extends Component {
       circleWidth,
       circleHeight,
       circlePos,
+      ratio,
       onProgress } = this.props;
     const isHorizontal = direction === 'horizontal';
     const averageLeft = Math.floor(circleWidth / 2);
     const averageTop = Math.floor(circleHeight / 2);
+    const finalWidthByRatio = Math.round(width * ratio);
+    const finalHeightByRatio = Math.round(height * ratio);
 
     this.state = {
-      regulatorLeft: isHorizontal ? circlePos === 'left' ? -averageLeft : width - circleWidth + averageLeft : -averageLeft,
-      regulatorTop: isHorizontal ? -averageTop : circlePos === 'top' ? -averageTop : height - circleHeight + averageTop
+      regulatorLeft: isHorizontal ? circlePos === 'left' ? finalWidthByRatio - averageLeft : width - circleWidth + averageLeft - finalWidthByRatio : -averageLeft,
+      regulatorTop: isHorizontal ? -averageTop : circlePos === 'top' ? finalHeightByRatio - averageTop : height - circleHeight + averageTop - finalHeightByRatio
     };
 
     this.max = (isHorizontal ? width : height) - (isHorizontal ? circleWidth : circleHeight) + (isHorizontal ? averageLeft : averageTop);

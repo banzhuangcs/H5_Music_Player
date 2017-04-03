@@ -30,6 +30,15 @@ class Play extends Component {
     this.audioEl.volume = playVolume;
   }
 
+  _playModel() {
+    const { playModel } = this.props;
+    this.audioEl.loop = playModel === 'loop' ? true : false;
+  }
+
+  _playProgress() {
+    const { playProgress } = this.props;
+  }
+
   constructor(props) {
     super(props);
 
@@ -39,9 +48,11 @@ class Play extends Component {
     this.handleEnded = () => {
 
     };
-    this.handleCanPlay = () =>
+    this.handleCanPlay = () => {
       this._playStatus();
-
+      this._controlVolume();
+      this._playModel();
+    }
   }
 
   render() {
@@ -57,6 +68,9 @@ class Play extends Component {
 
   componentDidUpdate() {
     this._controlVolume();
+    this._playStatus();
+    this._playModel();
+    this._playProgress();
   }
 
   componentDidMount() {

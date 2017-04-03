@@ -3,10 +3,14 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { modifyPlayProgress } from '../../../actionCreators/play';
+import { modifyLyricRemainTime } from '../../../actionCreators/lyric';
 import Progress from '../../global/Progress/Progress';
 import style from './play_progress.css';
 
-export default class PlayerProgress extends Component {
+class PlayerProgress extends Component {
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
@@ -14,35 +18,28 @@ export default class PlayerProgress extends Component {
     remainTime: PropTypes.string
   };
 
-  static defaultProps = {
-    totalTime: '05:00',
-    remainTime: '00:00'
-  };
-
   constructor(props) {
     super(props);
 
-    this.style = {
-      root: {
-        display: 'flex',
-        flexFlow: 'nowrap row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        width: 465,
-        height: 18
-      },
-      time: {
-        flex: 1
-      }
-    };
-    this.state = {
-      remainTime: this.props.remainTime
+    this.handleProgress = (percent) => {
+      const { totalTime } = this.props;
+      const [ minute, second ] = totalTime.split(':');
+      const playProgress = Number((parseInt(percent) / 100).toFixed(2));
+      const remainSecond = Math.floor((+minute * 60 + (+second)) * playProgress);
+      const resetRemainMinute = Math.floor(remainSecond / 60);
+      const resetRemainSecond = remainSecond % 60;
+      this.props.modifyPlayProgress(playProgress);
+      this.props.modifyLyricRemainTime(`${ resetRemainMinute < 10 ? '0' + resetRemainMinute : resetRemainMinute }:${ resetRemainSecond < 10 ? '0' + resetRemainSecond :resetRemainSecond }`);
     };
   }
 
   render() {
-    const { width, height, totalTime } = this.props;
-
+    const {
+      width,
+      height,
+      totalTime,
+      remainTime } = this.props;
+ 
     return (
       <div
         className={ style['play-progress'] }
@@ -53,13 +50,18 @@ export default class PlayerProgress extends Component {
             height={ 5 }
             circleWidth={ 16 }
             circleHeight={ 16 }
-            onProgress={ (percent) => { console.log(percent)  } } />
+            onProgress={ this.handleProgress } />
         </div>
         <div className={ style['play-progress-timeline'] }>
-          <label>{ this.state.remainTime }</label>/
+          <label>{ remainTime }</label>/
           <label>{ totalTime }</label>
         </div>
       </div>
     );
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => bindActionCreators({ modifyPlayProgress, modifyLyricRemainTime }, dispatch)
+)(PlayerProgress);
