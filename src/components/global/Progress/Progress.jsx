@@ -62,20 +62,30 @@ export default class Progress extends Component {
     };
     this._setProgressState = (x, y, fn) => {
       if (isHorizontal) {
+        const isLeft = this.props.circlePos === 'left';
+
         this.setState({
-          'regulatorLeft': this.props.circlePos === 'left'
+          'regulatorLeft': isLeft
             ? Math.min(this.max, Math.max(0, x))
             : this.max + Math.min(0, Math.max(-this.max, x))
         }, () =>
-          onProgress(getPercent(this.state.regulatorLeft, this.max))
+          onProgress(getPercent(isLeft
+            ? this.state.regulatorLeft
+            : this.max - this.state.regulatorLeft, this.max
+          ))
         );
       } else {
+        const isTop = this.props.circlePos === 'top';
+
         this.setState({
-          'regulatorTop': this.props.circlePos === 'top'
+          'regulatorTop': isTop
             ? Math.min(this.max, Math.max(0, y))
             : this.max + Math.min(0, Math.max(-this.max, y))
         }, () =>
-          onProgress(getPercent(this.state.regulatorTop, this.max))
+          onProgress(getPercent(isTop
+            ? this.state.regulatorTop
+            : this.max - this.state.regulatorTop, this.max
+          ))
         );
       }
 

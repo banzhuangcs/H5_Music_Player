@@ -27,6 +27,7 @@ class SoundControl extends Component {
     this.handleMouseOut = () =>
       this.setState({ showProgress: false })
     this.handleProgress = (percent) => {
+      console.log(percent);
       const sound = Number(((+percent.slice(0, -1)) / 100).toFixed(1));
       this.props.modifyPlayVolume(sound);
     }
