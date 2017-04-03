@@ -28,7 +28,9 @@ class Main extends Component {
     const {
       songs,
       playIndex,
+      playCondition,
       playModel,
+      playVolume,
       playSound,
       playProgress } = this.props;
 
@@ -61,6 +63,14 @@ class Main extends Component {
                 height={ 20 } />
             </div>
           </div>
+          <div className={ style['sound-audio'] }>
+            <Play
+              audio={ (songs[playIndex] || {}).audio }
+              playModel={ playModel }
+              playCondition={ playCondition }
+              playVolume={ playVolume }
+              playProgress={ playProgress } />
+          </div>
         </div>
       </div>
     );
@@ -73,7 +83,7 @@ export default connect(
     play: {
       playIndex = 0,
       playCondition = 'play',
-      playVolume = 0,
+      playVolume = 0.3,
       playModel = 'order',
       playProgress = 0
     }

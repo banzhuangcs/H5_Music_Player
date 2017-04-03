@@ -19,10 +19,12 @@ export default class Progress extends Component {
     height: PropTypes.number.isRequired,
     circleWidth: PropTypes.number.isRequired,
     circleHeight: PropTypes.number.isRequired,
+    circlePos: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
     onProgress: PropTypes.func.isRequired
   };
   static defaultProps = {
-    direction: 'horizontal'
+    direction: 'horizontal',
+    circlePos: 'left'
   };
 
   constructor(props) {
@@ -33,35 +35,45 @@ export default class Progress extends Component {
       height,
       circleWidth,
       circleHeight,
+      circlePos,
       onProgress } = this.props;
     const isHorizontal = direction === 'horizontal';
+    const averageLeft = Math.floor(circleWidth / 2);
+    const averageTop = Math.floor(circleHeight / 2);
 
     this.state = {
-      regulatorLeft: isHorizontal ? 0 : -Math.floor(this.props.circleWidth / 2),
-      regulatorTop: isHorizontal ? -Math.floor(this.props.circleHeight / 2) : 0
+      regulatorLeft: isHorizontal ? circlePos === 'left' ? -averageLeft : width - circleWidth + averageLeft : -averageLeft,
+      regulatorTop: isHorizontal ? -averageTop : circlePos === 'top' ? -averageTop : height - circleHeight + averageTop
     };
 
-    this.max = (isHorizontal ? width : height) - (isHorizontal ? circleWidth : circleHeight);
+    this.max = (isHorizontal ? width : height) - (isHorizontal ? circleWidth : circleHeight) + (isHorizontal ? averageLeft : averageTop);
 
     this._getClientPos = (fn) => (event) => {
       if (event.persist) {
         event.persist();
       }
 
-      const rect = this.el.getBoundingClientRect();
-      fn(event.clientX - rect.left, event.clientY - rect.top);
+      const rect = this.progressEl.getBoundingClientRect();
+      const diffX = event.clientX - rect[circlePos];
+      const diffY = event.clientY - rect[circlePos];
+
+      fn(diffX, diffY);
       event.stopPropagation();
     };
     this._setProgressState = (x, y, fn) => {
       if (isHorizontal) {
         this.setState({
-          'regulatorLeft': Math.min(this.max, Math.max(0, x))
+          'regulatorLeft': this.props.circlePos === 'left'
+            ? Math.min(this.max, Math.max(0, x))
+            : this.max + Math.min(0, Math.max(-this.max, x))
         }, () =>
           onProgress(getPercent(this.state.regulatorLeft, this.max))
         );
       } else {
         this.setState({
-          'regulatorTop': Math.min(this.max, Math.max(0, y))
+          'regulatorTop': this.props.circlePos === 'top'
+            ? Math.min(this.max, Math.max(0, y))
+            : this.max + Math.min(0, Math.max(-this.max, y))
         }, () =>
           onProgress(getPercent(this.state.regulatorTop, this.max))
         );
@@ -93,25 +105,33 @@ export default class Progress extends Component {
       width,
       height,
       circleWidth,
-      circleHeight } = this.props;
+      circleHeight,
+      circlePos } = this.props;
 
     const { regulatorLeft, regulatorTop } = this.state;
     const isHorizontal = direction === 'horizontal';
+    const isPosHorizontal = ['left', 'right'].indexOf(circlePos) >= 0;
 
     return (
       <div
-        ref={ el => this.el = el }
+        ref={ el => this.progressEl = el }
         className={ style['progress'] }
         style={{ width, height }}
         onMouseDown={ this.handleSpeed }>
           <span
             className={ style['consumption'] }
             style={{
-              width: isHorizontal ? regulatorLeft : width, 
-              height: isHorizontal ? height : regulatorTop }}></span>
+              width: isHorizontal ? circlePos === 'left' ? regulatorLeft : this.max - regulatorLeft : width,
+              height: isHorizontal ? height : circlePos === 'top' ? regulatorTop : this.max - regulatorTop,
+              [isPosHorizontal ? circlePos : 'left']: 0,
+              [isPosHorizontal ? 'top' : circlePos]: 0 }}></span>
           <span
             className={ style['regulator'] }
-            style={{ width: circleWidth, height: circleHeight, left: regulatorLeft, top: regulatorTop }}
+            style={{
+              width: circleWidth,
+              height: circleHeight,
+              left: regulatorLeft,
+              top: regulatorTop }}
             onMouseDown={ this.handleMouseDown }></span>
       </div>
     );

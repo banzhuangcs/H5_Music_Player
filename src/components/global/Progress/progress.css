@@ -8,8 +8,6 @@
 
 .consumption {
   position: absolute;
-  left: 0;
-  top: 0;
   background: #e03a3a;
   z-index: 1;
 }

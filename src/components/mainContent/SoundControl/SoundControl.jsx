@@ -3,10 +3,13 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { modifyPlayVolume } from '../../../actionCreators/play';
 import Progress from '../../global/Progress/Progress';
 import style from './sound_control.css';
 
-export default class SoundControl extends Component {
+class SoundControl extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired
@@ -23,6 +26,11 @@ export default class SoundControl extends Component {
       this.setState({ showProgress: true })
     this.handleMouseOut = () =>
       this.setState({ showProgress: false })
+    this.handleProgress = (percent) => {
+      const sound = Number(((+percent.slice(0, -1)) / 100).toFixed(1));
+      this.props.modifyPlayVolume(sound);
+    }
+
   }
 
   render() {
@@ -44,10 +52,16 @@ export default class SoundControl extends Component {
               height={ 100 }
               circleWidth={ 10 }
               circleHeight={ 10 }
-              onProgress={ (percent) => {} } />
+              circlePos="bottom"
+              onProgress={ this.handleProgress } />
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => ({ modifyPlayVolume: bindActionCreators(modifyPlayVolume, dispatch) })
+)(SoundControl);

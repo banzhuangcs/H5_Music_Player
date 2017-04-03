@@ -17,15 +17,15 @@
   cursor: pointer;
 }
 
-.player-control-visible {
+.player-control-condition {
   flex-basis: 30px;
   height: 30px;
   font-size: 30px;
   cursor: pointer;
 }
 
-.player-control-visible-play, .player-control-visible-pause {
-  composes: player-control-visible;
+.player-control-condition-play, .player-control-condition-pause {
+  composes: player-control-condition;
 }
 
 .player-control-prev:after {
@@ -36,10 +36,10 @@
   content: "\f4ad";
 }
 
-.player-control-visible-play:after {
-  content: "\f215";
+.player-control-condition-play:after {
+  content: "\f210";
 }
 
-.player-control-visible-pause:after {
-  content: "\f210";
+.player-control-condition-pause:after {
+  content: "\f215";
 }

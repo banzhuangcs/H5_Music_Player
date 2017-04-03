@@ -3,12 +3,71 @@
 */
 
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { modifyPlayProgress, modifyPlayIndex } from '../../../actionCreators/play';
 
-export default class Play extends Component {
+
+const bind = (el, type, handle) =>
+  el.addEventListener(type, handle, false)
+
+class Play extends Component {
   static propTypes = {
-        
+    audio: PropTypes.string,
+    playModel: PropTypes.string,
+    playCondition: PropTypes.string,
+    playVolume: PropTypes.number,
+    playProgress: PropTypes.number
   };
+
+  _playStatus() {
+    const { playCondition } = this.props;
+    this.audioEl[playCondition]();
+  }
+
+  _controlVolume() {
+    const { playVolume } = this.props;
+    this.audioEl.volume = playVolume;
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.handleTimeUpdate = () => {
+
+    };
+    this.handleEnded = () => {
+
+    };
+    this.handleCanPlay = () =>
+      this._playStatus();
+
+  }
+
+  render() {
+    const { audio, playModel } = this.props;
+
+    return (
+      <audio
+        ref={ el => this.audioEl = el }
+        src={ this.props.audio }
+        preload={ true }></audio>
+    );
+  }
+
+  componentDidUpdate() {
+    this._controlVolume();
+  }
+
+  componentDidMount() {
+    bind(this.audioEl, 'canplay', this.handleCanPlay);
+  }
 }
+
+export default connect(
+  null,
+  (dispatch) => bindActionCreators({ modifyPlayProgress, modifyPlayIndex }, dispatch)
+)(Play);
 /*
 H5 Audio Api
 

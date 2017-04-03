@@ -15,7 +15,7 @@ class PlayControl extends Component {
     this.handlePlayPrev = () =>
       this.props.modifyPlayIndex(this.props.playIndex - 1)
     this.handlePlayCondition= () =>
-      this.props.modifyPlayCondition(!this.props.playCondition)
+      this.props.modifyPlayCondition(this.props.playCondition === 'play' ? 'pause' : 'play')
     this.handlePlayNext = () =>
       this.props.modifyPlayIndex(this.props.playIndex + 1)
   }
@@ -25,7 +25,7 @@ class PlayControl extends Component {
       <div className={ style['player-control'] }>
         <i className={ style['player-control-prev'] }
            onClick={ this.handlePlayPrev }></i>
-        <i className={ style[`${ this.props.playCondition ? 'player-control-visible-pause' : 'player-control-visible-play' }`] }
+        <i className={ style[`player-control-condition-${ this.props.playCondition }`] }
            onClick={ this.handlePlayCondition }></i>
         <i className={ style['player-control-next'] }
            onClick={ this.handlePlayNext }></i>
@@ -38,7 +38,7 @@ export default connect(
   ({
     play: {
       playIndex = 0,
-      playCondition = 'play'
+      playCondition = 'pause'
     }
   }) => ({ playIndex, playCondition }),
   (dispatch) => bindActionCreators({ modifyPlayIndex, modifyPlayCondition }, dispatch)
