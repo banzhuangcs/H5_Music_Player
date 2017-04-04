@@ -10,7 +10,8 @@
   font-family: H5Music;
 }
 
-.player-control-prev, .player-control-next {
+.player-control-prev, .player-control-next,
+.player-control-prev-outline, .player-control-next-outline {
   flex-basis: 20px;
   height: 20px;
   font-size: 20px;
@@ -32,8 +33,16 @@
   content: "\f4ab";
 }
 
+.player-control-prev-outline:after {
+  content: "\f4aa";
+}
+
 .player-control-next:after {
   content: "\f4ad";
+}
+
+.player-control-next-outline:after {
+  content: "\f4ac";
 }
 
 .player-control-condition-play:after {

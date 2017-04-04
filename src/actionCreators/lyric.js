@@ -4,17 +4,14 @@
 
 import 'whatwg-fetch';
 
-export const getLyricInfo = (url, getLyricList, getLyricTotalTime) => (dispatch) => {
+export const getLyricInfo = (url, getLyricList) => (dispatch) => {
   fetch(url)
     .then(res => res.text())
     .catch(error => error.message)
     .then(lyric => {
-      const lyrics = getLyricList(lyric);
-      const totalTime = getLyricTotalTime(lyric);
       dispatch({
         type: 'GET_LYRIC_INFO',
-        totalTime,
-        lyrics
+        lyrics: getLyricList(lyric)
       })
     })
 };
@@ -22,6 +19,11 @@ export const getLyricInfo = (url, getLyricList, getLyricTotalTime) => (dispatch)
 export const modifyLyricRemainTime = (remainTime) => ({
   type: 'MODIFY_LYRIC_REMAINTIME',
   remainTime
+});
+
+export const modifyLyricTotalTime = (totalTime) => ({
+  type: 'MODIFY_LYRIC_TOTALTIME',
+  totalTime
 });
 
 export const toggleLyric = (isVisible) => ({

@@ -22,7 +22,8 @@ export const modifyPlayModel = (playModel) => ({
   playModel
 });
 
-export const modifyPlayProgress = (playProgress) => ({
+export const modifyPlayProgress = (playProgress, autoProgress) => ({
   type: 'MODIFY_PLAY_PROGRESS',
-  playProgress
+  playProgress,
+  autoProgress
 });

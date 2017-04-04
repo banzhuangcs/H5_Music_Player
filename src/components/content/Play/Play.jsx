@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { modifyPlayProgress, modifyPlayIndex } from '../../../actionCreators/play';
-
+import { modifyLyricTotalTime, modifyLyricRemainTime } from '../../../actionCreators/lyric';
 
 const bind = (el, type, handle) =>
   el.addEventListener(type, handle, false)
@@ -17,7 +17,10 @@ class Play extends Component {
     playModel: PropTypes.string,
     playCondition: PropTypes.string,
     playVolume: PropTypes.number,
-    playProgress: PropTypes.number
+    playProgress: PropTypes.number,
+    autoProgress: PropTypes.bool,
+    totalTime: PropTypes.string,
+    onTimeUpdate: PropTypes.func
   };
 
   _playStatus() {
@@ -37,21 +40,76 @@ class Play extends Component {
 
   _playProgress() {
     const { playProgress } = this.props;
+    const remainSecond = Math.floor(this._getTotalTimeSecond() * playProgress);
+    this.audioEl.currentTime = remainSecond;
+  }
+
+  _getTotalTimeSecond() {
+    const { totalTime } = this.props;
+    const [ minute, second ] = totalTime.split(':');
+
+    return +minute * 60 + (+second);
+  }
+
+  _calcTime(time) {
+    const minute = Math.floor(time / 60);
+    const second = Math.floor(time % 60);
+
+    return [
+      minute < 10 ? '0' + minute : minute,
+      second < 10 ? '0' + second : second
+    ];
+  }
+
+  _playNext() {
+    const {
+      playIndex,
+      playMode,
+      songs,
+      modifyPlayIndex } = this.props;
+
+    if (songs.length
+      && playIndex !== songs.length - 1
+      && playMode !== 'loop') {
+      modifyPlayIndex(playIndex + 1);
+    }
   }
 
   constructor(props) {
     super(props);
 
     this.handleTimeUpdate = () => {
+      const currentTime = this.audioEl.currentTime;
+      const totalTime = this.audioEl.duration;
+      const { onTimeUpdate, modifyPlayProgress, modifyLyricRemainTime } = this.props;
+      const [ minute, second ] = this._calcTime(currentTime);
 
+      modifyLyricRemainTime(`${ minute }:${ second }`);
+      onTimeUpdate(currentTime / totalTime);
     };
-    this.handleEnded = () => {
-
-    };
+    this.handleEnded = () =>
+      this._playNext()
     this.handleCanPlay = () => {
+      const [ minute, second ] = this._calcTime(this.audioEl.duration);
+
+      this.props.modifyLyricTotalTime(`${ minute }:${ second }`);
       this._playStatus();
       this._controlVolume();
       this._playModel();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { playCondition, playVolume, playModel, playProgress } = prevProps;
+
+    if (this.props.playCondition !== playCondition) {
+      this._playStatus();
+    } else if (this.props.playVolume !== playVolume) {
+      this._controlVolume();
+    } else if (this.props.playModel !== playModel) {
+      this._playModel();
+    } else if (this.props.playProgress !== playProgress) {
+      this._playProgress();
     }
   }
 
@@ -66,21 +124,21 @@ class Play extends Component {
     );
   }
 
-  componentDidUpdate() {
-    this._controlVolume();
-    this._playStatus();
-    this._playModel();
-    this._playProgress();
-  }
-
   componentDidMount() {
     bind(this.audioEl, 'canplay', this.handleCanPlay);
+    bind(this.audioEl, 'ended', this.handleEnded);
+    bind(this.audioEl, 'timeupdate', this.handleTimeUpdate);
   }
 }
 
 export default connect(
   null,
-  (dispatch) => bindActionCreators({ modifyPlayProgress, modifyPlayIndex }, dispatch)
+  (dispatch) => bindActionCreators({
+    modifyPlayProgress,
+    modifyPlayIndex,
+    modifyLyricTotalTime,
+    modifyLyricRemainTime
+  }, dispatch)
 )(Play);
 /*
 H5 Audio Api

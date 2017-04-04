@@ -9,8 +9,7 @@ const addEvent = (el, type, handle) =>
   el.addEventListener(type, handle, false)
 const removeEvent = (el, type, handle) =>
   el.removeEventListener(type, handle, false)
-const getPercent = (to, total) =>
-  `${ Math.round(to / total * 100) }%`
+const getPercent = (to, total) => to / total
 
 export default class Progress extends Component {
   static propTypes = {
@@ -31,6 +30,7 @@ export default class Progress extends Component {
 
   constructor(props) {
     super(props);
+
     const {
       direction,
       width,
@@ -63,9 +63,9 @@ export default class Progress extends Component {
       const diffY = event.clientY - rect[circlePos];
 
       fn(diffX, diffY);
-      event.stopPropagation();
+      event.stopPropagation && event.stopPropagation();
     };
-    this._setProgressState = (x, y, fn) => {
+    this.setProgressState = (x, y, unCallProgress) => {
       if (isHorizontal) {
         const isLeft = this.props.circlePos === 'left';
 
@@ -74,7 +74,7 @@ export default class Progress extends Component {
             ? Math.min(this.max, Math.max(0, x))
             : this.max + Math.min(0, Math.max(-this.max, x))
         }, () =>
-          onProgress(getPercent(isLeft
+          !unCallProgress && onProgress(getPercent(isLeft
             ? this.state.regulatorLeft
             : this.max - this.state.regulatorLeft, this.max
           ))
@@ -87,7 +87,7 @@ export default class Progress extends Component {
             ? Math.min(this.max, Math.max(0, y))
             : this.max + Math.min(0, Math.max(-this.max, y))
         }, () =>
-          onProgress(getPercent(isTop
+          !unCallProgress && onProgress(getPercent(isTop
             ? this.state.regulatorTop
             : this.max - this.state.regulatorTop, this.max
           ))
@@ -102,16 +102,16 @@ export default class Progress extends Component {
       addEvent(document, 'mouseup', this.handleMouseUp);
     });
     this.handleMouseMove = this._getClientPos((x, y) =>
-      this._setProgressState(x, y)
+      this.setProgressState(x, y)
     );
     this.handleMouseUp = this._getClientPos((x, y) => {
       removeEvent(document, 'mousemove', this.handleMouseMove);
       removeEvent(document, 'mouseup', this.handleMouseUp);
     });
 
-    this.handleSpeed = this._getClientPos((x, y) =>
-      this._setProgressState(x, y)
-    );
+    this.handleSpeed = this.autoProgress = this._getClientPos((x, y) =>{
+      this.setProgressState(x, y)
+    });
   }
 
   render() {

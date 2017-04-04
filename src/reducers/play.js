@@ -17,7 +17,7 @@ export default function play (state = {}, action) {
       return Object.assign({}, state, { playModel: action.playModel });
 
     case 'MODIFY_PLAY_PROGRESS':
-      return Object.assign({}, state, { playProgress: action.playProgress });
+      return Object.assign({}, state, { playProgress: action.playProgress, autoProgress: action.autoProgress });
 
     default:
       return state;

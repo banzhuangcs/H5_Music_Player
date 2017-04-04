@@ -16,6 +16,13 @@ import style from '../statics/styles/global.css';
 import data from '../songs.json';
 
 class Main extends Component {
+  constructor(props) {
+     super(props);
+
+     this.handleTimeUpdate = (currentTimeRatio) =>
+       this.refs['playProgress'].updateProgressPos(currentTimeRatio);
+  }
+
   componentWillMount() {
     const { getSongs } = this.props;
 
@@ -33,9 +40,11 @@ class Main extends Component {
       playVolume,
       playSound,
       playProgress,
+      autoProgress,
       totalTime,
+      dispatch,
       remainTime } = this.props;
-    
+
     return (
       <div className={ style['wrapper'] }>
         <div className={ style['wrapper-inner'] }>
@@ -57,10 +66,14 @@ class Main extends Component {
             </div>
             <div className={ style['play-progress-panel'] }>
               <PlayProgress
+                ref="playProgress"
                 width={ 475 }
                 height={ 30 }
+                dispatch={ dispatch }
                 totalTime={ totalTime }
-                remainTime={ remainTime } />
+                remainTime={ remainTime }
+                playProgress={ playProgress }
+                autoProgress={ autoProgress } />
             </div>
             <div className={ style['lyric-control-panel'] }>
               <LyricControl
@@ -70,11 +83,16 @@ class Main extends Component {
           </div>
           <div className={ style['sound-audio'] }>
             <Play
+              songs={ songs }
               audio={ (songs[playIndex] || {}).audio }
+              playIndex={ playIndex }
               playModel={ playModel }
               playCondition={ playCondition }
               playVolume={ playVolume }
-              playProgress={ playProgress } />
+              playProgress={ playProgress }
+              autoProgress={ autoProgress }
+              totalTime={ totalTime }
+              onTimeUpdate={ this.handleTimeUpdate } />
           </div>
         </div>
       </div>
@@ -90,7 +108,8 @@ export default connect(
       playCondition = 'play',
       playVolume = 0.4,
       playModel = 'order',
-      playProgress = 0
+      playProgress = 0,
+      autoProgress = false
     },
     lyric: {
       totalTime = '00:00',
@@ -103,8 +122,9 @@ export default connect(
     playVolume,
     playModel,
     playProgress,
+    autoProgress,
     totalTime,
     remainTime
    }),
-  (dispatch) => ({ getSongs: bindActionCreators(getSongs, dispatch) })
+  (dispatch) => ({ getSongs: bindActionCreators(getSongs, dispatch), dispatch })
 )(Main);

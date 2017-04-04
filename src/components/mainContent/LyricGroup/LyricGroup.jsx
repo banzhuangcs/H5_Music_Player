@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLyricInfo, modifyLaricUseTime } from '../../../actionCreators/lyric';
+import { getLyricInfo } from '../../../actionCreators/lyric';
 import Lyric from '../../content/Lyric/Lyric';
 import style from './lyric_group.css';
 
@@ -29,19 +29,13 @@ class LyricGroup extends Component {
           part: text.replace(/\[.*?\]/, '').trim()
         };
       })
-    this._getLyricTotalTime = (lyric) => {
-      const times = lyric.match(matchTime);
-      const totalTime = times.pop().replace(/[\[\]]/g, '').replace(/\.\d+/, '');
-
-      return `${ totalTime }`;
-    };
   }
 
   componentWillReceiveProps(nextProps) {
     const { getLyricInfo, songlrc } = nextProps;
 
     if (songlrc !== this.props.songlrc) {
-      getLyricInfo(songlrc, this._getLyricList, this._getLyricTotalTime);
+      getLyricInfo(songlrc, this._getLyricList);
     }
   }
 
@@ -71,5 +65,5 @@ export default connect(
     lyric: {
       lyrics = [],
       isVisible = true } }) => ({ lyrics, isVisible }),
-  (dispatch) => bindActionCreators({ getLyricInfo, modifyLaricUseTime }, dispatch)
+  (dispatch) => bindActionCreators({ getLyricInfo }, dispatch)
 )(LyricGroup);
