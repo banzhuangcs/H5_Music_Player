@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+body {
+  background: #2e86ef;
+}
+
+.wrapper {
+  position: absolute;
+  width: 640px;
+  height: 360px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px 15px;
+}
+
+.wrapper-inner {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+.sound-detail {
+  flex: 1;
+}
+
+.sound-progress {
+  display: flex;
+  flex-flow: nowrap row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+.sound-control-panel {
+  flex: 0 0 30px;
+}
+
+.play-model-panel {
+  flex: 0 0 30px;
+  font-family: "H5Music";
+}
+
+.play-progress-panel {
+  flex: 0 0 475px;
+}
+
+.lyric-control-panel {
+  flex: 0 0 20px;
+}
+
+.sound-audio {
+  display: none;
+}

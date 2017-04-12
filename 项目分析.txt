@@ -1,0 +1,63 @@
+H5音乐播放器需求
+1、歌曲播放、暂停
+2、切换上一首和下一首
+3、展示歌曲播放进度、总共多少分钟和还剩多少分钟
+4、调节音量
+5、切换随机播放、单曲播放、顺序播放
+6、显示歌词
+
+组件划分
+  公共组件：应用中常用的，只是控制ui自身状态的组件，对业务状态只读。
+    比如button、input、checkbox、radio
+
+    input：包括的状态分为type placeholder value，绑定input的onChange，修改value，
+    checkbox: 组件状态分为disable checked label，对checkbox绑定onChange，修改其checked状态
+    radio和checkbox差不多
+    select: 组件状态分为value和options，对select绑定onChange
+  业务组件
+    容器组件：获取数据，控制展示组件状态
+    展示组件：定义组件结构和样式
+
+h5音乐播放器组件划分
+  因为项目不复杂、功能不算多、开发人数少，此项目的组件全都划分为业务组件
+  业务组件：
+    PlayerProgress
+    Sound
+    PlayerType
+    WordControl
+    PlayerControl
+    Word
+
+React开发问题
+ 1、React的Event不是DOM Event而是自己封装的，如果将这个对象在当前上下文传入给其他函数，那么会失效，解决办法就是e.persist();
+歌词同步
+ 2、异步加载lrc文件
+
+Redux异步action
+  applyMiddleware
+    定义为一个高阶函数，接收类似redux-thunk这种中间件，返回一个接收redux createStore方法的新方法，新方法里在返回一个方法
+    在最后返回的方法中，首先创建store，创建中间件对象，包括getState和dispatch，传入给react-thunk这个中间件
+
+  当createStore第二个参数是调用applyMiddleware创建的高阶函数的话，那么就会直接的传入createStore和当前reducer创建store
+  在高阶返回的新函数中，创建store,middlewareAPI
+  middlewareAPI里包括getState: store.getState, dispatch: (action) => dispatch(action)
+  调用middleware，并且传入middlewareAPI给react-trunk返回(next) => (action) => {
+
+  },在传入store.dispatch就返回(action) => {
+    f
+  }
+
+  返回的{
+    getState,
+    subscribe,
+    dispatch: function (action) {
+      if (action === 'function') {
+        return dispatch(action(dispatch, getState))
+      }
+    }
+  }
+
+  dispatch(actionCreator(sj))
+
+  dispatch()
+  dispatch(actionCreator(dispatch))

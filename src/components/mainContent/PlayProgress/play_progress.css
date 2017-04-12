@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.play-progress {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play-progress-panel, .play-progress-timeline {
+  flex: 0;
+}

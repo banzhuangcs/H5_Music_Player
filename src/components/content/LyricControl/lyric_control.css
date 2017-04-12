@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.lyric-control {
+  display: inline-block;
+  border-radius: 100%;
+  color: #fff;
+  background: #000;
+  text-align: center;
+  font-size: 10px;
+  cursor: pointer;
+}
