@@ -1,9 +1,0 @@
-@charset "UTF-8";
-
-.play-model-order:after {
-  content: "\f459";
-}
-
-.play-model-loop:after {
-  content: "\f4a8";
-}
