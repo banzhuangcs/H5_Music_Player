@@ -22,6 +22,10 @@ export default (env) =>
     plugins: [
       new ExtractTextWebpackPlugin('assets/styles/all.css'),
 
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(env)
+      }),
+
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false

@@ -26,7 +26,7 @@ class Main extends Component {
   componentWillMount() {
     const { getSongs } = this.props;
 
-    if (process.env.NODE_ENV === 'dev') {
+    if (process.env.NODE_ENV === 'pro') {
       getSongs(data);
     }
   }
