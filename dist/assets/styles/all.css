@@ -1,0 +1,310 @@
+@charset "UTF-8";
+
+.lyric_group__lyric-group-LBx84 {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  font-size: 14px;
+}
+
+.lyric_group__lyric-group-LBx84 .lyric_group__lyric-group-inner-1cBao {
+   flex: 1;
+   position: relative;
+}
+
+.lyric_group__lyric-group-inner-1cBao .lyric_group__lyric-group-panel-cMdfp {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.lyric_group__lyric-group-inner-1cBao .lyric_group__play-progress-timeline-3xs_4 {
+  flex: 1;
+}
+@charset "UTF-8";
+
+.play_control__player-control-10yg8 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  height: 36px;
+  font-family: H5Music;
+}
+
+.play_control__player-control-prev-1AhbW, .play_control__player-control-next-27dDJ,
+.play_control__player-control-prev-outline-1bmPH, .play_control__player-control-next-outline-x5Nrl {
+  flex-basis: 20px;
+  height: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.play_control__player-control-condition-lM9ru {
+  flex-basis: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.play_control__player-control-condition-play-ts32m, .play_control__player-control-condition-pause-EFoKj {
+}
+
+.play_control__player-control-prev-1AhbW:after {
+  content: "\F4AB";
+}
+
+.play_control__player-control-prev-outline-1bmPH:after {
+  content: "\F4AA";
+}
+
+.play_control__player-control-next-27dDJ:after {
+  content: "\F4AD";
+}
+
+.play_control__player-control-next-outline-x5Nrl:after {
+  content: "\F4AC";
+}
+
+.play_control__player-control-condition-play-ts32m:after {
+  content: "\F210";
+}
+
+.play_control__player-control-condition-pause-EFoKj:after {
+  content: "\F215";
+}
+@charset "UTF-8";
+
+.song_detail__song-wrapper-2ZbW_ {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.song_detail__song-panel-2fcbl {
+  flex: 0 0 270px;
+  text-align: center;
+}
+
+.song_detail__song-info-3vtTn {
+  flex: 0 0 300px;
+}
+
+.song_detail__song-panel-title-RjhP5 {
+  line-height: 30px;
+  color: #333;
+}
+
+.song_detail__song-panel-title-RjhP5 > h3 {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.song_detail__song-panel-title-RjhP5 > small {
+  font-size: 14px;
+}
+
+.song_detail__song-panel-thumbnail-h3TaT > img {
+  display: inline-block;
+  border-radius: 100%;
+  width: 170px;
+  height: 170px;
+  margin: 15px auto;
+}
+
+.song_detail__song-panel-play-2lwA5 > div {
+  display: inline-block;
+}
+@charset "UTF-8";
+
+.progress__progress-1UVPH {
+  position: relative;
+  background: #777;
+  cursor: pointer;
+}
+
+.progress__consumption-2EDI5 {
+  position: absolute;
+  background: #e03a3a;
+  z-index: 1;
+}
+
+.progress__regulator-hwbeX {
+  position: absolute;
+  border-radius: 100%;
+  background: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+  z-index: 2;
+}
+@charset "UTF-8";
+
+.sound_control__sound-control-1TBAh {
+  position: relative;
+  text-align: center;
+  padding: 0 5px;
+  box-sizing: border-box;
+  font-family: H5Music;
+  cursor: pointer;
+}
+
+.sound_control__sound-control-1TBAh:after {
+  content: "\F258";
+}
+
+.sound_control__sound-popup-1Vq86 {
+  position: absolute;
+  width: 100%;
+  height: 140px;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .15);
+  transition: opacity .25s linear;
+}
+
+.sound_control__sound-popup-inner-GOaat {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 10px auto 0;
+  width: 3px;
+  height: 100px;
+}
+@charset "UTF-8";
+
+.play_progress__play-progress-1gEeD {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play_progress__play-progress-panel-2vVnj, .play_progress__play-progress-timeline-2peb5 {
+  flex: 0;
+}
+@charset "UTF-8";
+
+.play_model__play-model-order-2jt8G:after {
+  content: "\F459";
+}
+
+.play_model__play-model-loop-3d-lv:after {
+  content: "\F4A8";
+}
+@charset "UTF-8";
+
+.lyric_control__lyric-control-2GqI4 {
+  display: inline-block;
+  border-radius: 100%;
+  color: #fff;
+  background: #000;
+  text-align: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+@charset "UTF-8";
+
+body {
+  background: #2e86ef;
+}
+
+.global__wrapper-1zcfg {
+  position: absolute;
+  width: 640px;
+  height: 360px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px 15px;
+}
+
+.global__wrapper-inner-1CkxR {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+.global__sound-detail-bBzS4 {
+  flex: 1;
+}
+
+.global__sound-progress-1zhW8 {
+  display: flex;
+  flex-flow: nowrap row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+.global__sound-control-panel-3LqUZ {
+  flex: 0 0 30px;
+}
+
+.global__play-model-panel-1rkQy {
+  flex: 0 0 30px;
+  font-family: "H5Music";
+}
+
+.global__play-progress-panel-TNN7f {
+  flex: 0 0 475px;
+}
+
+.global__lyric-control-panel-brN_0 {
+  flex: 0 0 20px;
+}
+
+.global__sound-audio-1tCak {
+  display: none;
+}
+@charset "UTF-8";
+
+body, div, p,
+dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+input,textarea {
+  margin: 0;
+  padding: 0;
+}
+
+input, textarea, button, select {
+  font-size: inherit;
+  outline: none;
+  vertical-align: middle;
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+a {
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  text-decoration: none;
+}
+
+i, em, small {
+  font-style: normal;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+body {
+  font: 500 12px/1 Helvetica, Arial, "Hiragino Sans GB", 'Microsoft yahei', sans-serif;
+}
+
+@font-face {
+  font-family: "H5Music"; src: url(../../assets/fonts/2c2ae068be3b089e0a5b59abb1831550.eot); src: url(../../assets/fonts/2c2ae068be3b089e0a5b59abb1831550.eot#iefix) format("embedded-opentype"), url(../../assets/fonts/24712f6c47821394fba7942fbb52c3b2.ttf) format("truetype"), url(../../assets/fonts/05acfdb568b3df49ad31355b19495d4a.woff) format("woff"), url(../../assets/fonts/621bd386841f74e0053cb8e67f8a0604.svg#Ionicons) format("svg"); font-weight: normal; font-style: normal;
+}
